@@ -36,7 +36,10 @@ function App() {
         <div className="flex justify-center w-full">
           <div className="bg-[#F1F2F3] flex flex-row w-[1200px] p-20">
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/"
+                element={<HomePage characterData={characterList} />}
+              />
               <Route path="/character" element={<HomePage />} />
             </Routes>
           </div>

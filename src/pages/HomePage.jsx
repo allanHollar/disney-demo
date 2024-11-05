@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import CharacterCard from "../components/character-card/CharacterCard";
 
-const HomePage = () => {
+const HomePage = ({ characterData }) => {
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the Home Page!</p>
+      <CharacterCard characterData={characterData} />
     </div>
   );
 };
