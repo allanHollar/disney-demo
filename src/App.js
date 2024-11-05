@@ -31,13 +31,17 @@ function App() {
 
   return (
     <Router>
-      <div className="App mt-6">
+      <>
         <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/character" element={<HomePage />} />
-        </Routes>
-      </div>
+        <div className="flex justify-center w-full">
+          <div className="bg-[#F1F2F3] flex flex-row w-[1200px] p-20">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/character" element={<HomePage />} />
+            </Routes>
+          </div>
+        </div>
+      </>
     </Router>
   );
 }

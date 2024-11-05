@@ -2,7 +2,7 @@ import Search from "../search";
 
 const Header = () => {
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center p-[32px] w-full">
       <div className="flex flex-row w-[1200px]">
         <svg
           className="mr-10"
