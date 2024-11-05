@@ -1,7 +1,8 @@
 interface Character {
-  id: string;
+  _id: string;
   name: string;
   films: string[];
+  imageUrl: string;
 }
 
 interface CharacterApiResponse {

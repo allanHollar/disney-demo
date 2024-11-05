@@ -6,9 +6,10 @@ import HomePage from "./pages/HomePage";
 import { fetchCharacterList } from "./services/charactersApi";
 
 interface Character {
-  id: string;
+  _id: string;
   name: string;
   films: string[];
+  imageUrl: string;
 }
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
 
     getCharacterList();
   }, []);
+
+  useEffect(() => {
+    console.log("aaa", characterList);
+  });
 
   return (
     <Router>
