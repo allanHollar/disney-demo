@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { fetchCharacterList } from './services/charactersApi'
+import React, { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./App.css";
+import Header from "./components/header";
+import HomePage from "./pages/HomePage";
+import { fetchCharacterList } from "./services/charactersApi";
 
 function App() {
   const [characterList, setCharacterList] = useState([]);
@@ -18,33 +20,25 @@ function App() {
       } finally {
         setIsLoadiong(false);
       }
-    }
+    };
 
-    getCharacterList()
-  }
-  , []);
+    getCharacterList();
+  }, []);
 
   useEffect(() => {
-   console.log('aaa characterList', characterList);
-  })
+    console.log("aaa characterList", characterList);
+  });
 
   return (
-    <div className="App mt-6">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App mt-6">
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/character" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
