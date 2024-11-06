@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import Footer from "../components/footer";
+import { Character } from "../types/types";
+
+interface CharacterDetailsProps {
+  characterList: Character[];
+}
 
 interface Profile {
   firstName: string;
@@ -17,7 +22,7 @@ interface Profile {
 
 const states = ["CA", "NY", "TX", "FL", "IL", "GA", "PA", "AZ"];
 
-const ProfilePage: React.FC = () => {
+const ProfilePage: React.FC<CharacterDetailsProps> = () => {
   const defaultProfile: Profile = {
     firstName: "John",
     lastName: "Smith",
