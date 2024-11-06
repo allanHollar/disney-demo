@@ -34,7 +34,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ characterData }) => {
         </ul>
       </div>
       <Link
-        to="/"
+        to={`/character/${characterData.name}`}
         className="mt-auto pb-9 font-black text-sm underline uppercase leading-[14px]"
       >
         View Profile

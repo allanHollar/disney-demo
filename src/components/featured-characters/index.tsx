@@ -4,7 +4,7 @@ import CharacterCard from "../character-card";
 interface Character {
   _id: string;
   name: string;
-  films: string[];
+  films?: string[];
   imageUrl: string;
 }
 

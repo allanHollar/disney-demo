@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/header";
 import HomePage from "./pages/HomePage";
+import CharacterDetails from "./pages/CharacterDetails";
 import { fetchCharacterList } from "./services/charactersApi";
 import { Character } from "./types/types";
 
@@ -31,7 +32,7 @@ const App: React.FC<AppProps> = ({ characterData }) => {
     const getCharacterList = async () => {
       try {
         const response = await fetchCharacterList();
-        setCharacterList(response.data); // Extracting the character array from the response
+        setCharacterList(response.data as Character[]); // Extracting the character array from the response
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -43,6 +44,10 @@ const App: React.FC<AppProps> = ({ characterData }) => {
 
     getCharacterList();
   }, []);
+
+  useEffect(() => {
+    console.log("aaa characterList", characterList);
+  });
 
   return (
     <Router>
@@ -64,14 +69,12 @@ const App: React.FC<AppProps> = ({ characterData }) => {
                 }
               />
               <Route
-                path="/character"
-                element={
-                  <HomePage
-                    searchQuery={searchQuery}
-                    characterData={characterList}
-                    filteredCharacters={filteredCharacters}
-                  />
-                }
+                path="/character/:name"
+                element={<CharacterDetails characterList={characterList} />}
+              />
+              <Route
+                path="/profile"
+                element={<CharacterDetails characterList={characterList} />}
               />
             </Routes>
           </div>
