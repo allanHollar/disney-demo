@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../components/footer";
+import Cookies from "js-cookie";
 import { Character } from "../types/types";
 
 interface CharacterDetailsProps {
@@ -24,17 +25,18 @@ const states = ["CA", "NY", "TX", "FL", "IL", "GA", "PA", "AZ"];
 
 const ProfilePage: React.FC<CharacterDetailsProps> = () => {
   const defaultProfile: Profile = {
-    firstName: "John",
-    lastName: "Smith",
-    name: "John Smith",
-    location: "San Francisco",
-    state: "CA",
-    birthdate: "01/01/1980",
-    favoriteCharacter: "Elsa",
-    favoriteRide: "Space Mountain",
-    favoriteMovie: "Moana",
-    favoriteDisneyland: "Disney World, Florida",
-    lastUpdated: "May 20th, 2024",
+    firstName: Cookies.get("firstName") || "John",
+    lastName: Cookies.get("lastName") || "Smith",
+    name: Cookies.get("name") || "John Smith",
+    location: Cookies.get("location") || "San Francisco",
+    state: Cookies.get("state") || "CA",
+    birthdate: Cookies.get("birthdate") || "01/01/1980",
+    favoriteCharacter: Cookies.get("favoriteCharacter") || "Elsa",
+    favoriteRide: Cookies.get("favoriteRide") || "Space Mountain",
+    favoriteMovie: Cookies.get("favoriteMovie") || "Moana",
+    favoriteDisneyland:
+      Cookies.get("favoriteDisneyland") || "Disney World, Florida",
+    lastUpdated: Cookies.get("lastUpdated") || "May 20th, 2024",
   };
 
   const [profile, setProfile] = useState<Profile>(defaultProfile);
@@ -46,7 +48,9 @@ const ProfilePage: React.FC<CharacterDetailsProps> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     field: keyof Profile
   ) => {
-    setProfile({ ...profile, [field]: e.target.value });
+    const newValue = e.target.value;
+    setProfile({ ...profile, [field]: newValue });
+    Cookies.set(field, newValue); // Save the field value to cookies
   };
 
   const getCurrentDateFormatted = () => {
@@ -60,11 +64,15 @@ const ProfilePage: React.FC<CharacterDetailsProps> = () => {
 
   const toggleEdit = () => {
     if (isEditing) {
-      setProfile((prevProfile) => ({
-        ...prevProfile,
+      const updatedProfile = {
+        ...profile,
         name: `${profile.firstName} ${profile.lastName}`,
         lastUpdated: getCurrentDateFormatted(),
-      }));
+      };
+      setProfile(updatedProfile);
+      // Update "name" and "lastUpdated" in cookies
+      Cookies.set("name", updatedProfile.name);
+      Cookies.set("lastUpdated", updatedProfile.lastUpdated);
     } else {
       setOriginalProfile(profile); // Save current state before editing
     }
