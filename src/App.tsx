@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import CharacterDetails from "./pages/CharacterDetails";
 import { fetchCharacterList } from "./services/charactersApi";
 import { Character } from "./types/types";
+import ProfilePage from "./pages/ProfilePage";
 
 interface AppProps {
   characterData: Character[];
@@ -45,10 +46,6 @@ const App: React.FC<AppProps> = ({ characterData }) => {
     getCharacterList();
   }, []);
 
-  useEffect(() => {
-    console.log("aaa characterList", characterList);
-  });
-
   return (
     <Router>
       <>
@@ -74,7 +71,7 @@ const App: React.FC<AppProps> = ({ characterData }) => {
               />
               <Route
                 path="/profile"
-                element={<CharacterDetails characterList={characterList} />}
+                element={<ProfilePage characterList={characterList} />}
               />
             </Routes>
           </div>
