@@ -1,12 +1,19 @@
-const Search = () => {
+import React from "react";
+
+interface SearchProps {
+  searchQuery: string;
+  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Search: React.FC<SearchProps> = ({ searchQuery, onSearchChange }) => {
   return (
-    <>
-      <input
-        type="text"
-        className="bg-[#F1F2F3] p-4 rounded-[100px] w-[976px] h-[48px] outline-none"
-        placeholder="Find a character"
-      />
-    </>
+    <input
+      type="text"
+      value={searchQuery}
+      onChange={onSearchChange}
+      placeholder="Search characters..."
+      className="border-gray-300 p-2 border rounded w-full"
+    />
   );
 };
 

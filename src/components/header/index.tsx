@@ -1,9 +1,22 @@
+import React, { useState } from "react";
 import Search from "../search";
 
-const Header = () => {
+interface HeaderProps {
+  onSearch: (query: string) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearch(query); // Pass the search query to the parent
+  };
+
   return (
     <div className="flex justify-center p-[32px] w-full">
-      <div className="flex flex-row w-[1200px]">
+      <div className="flex flex-row items-center w-[1200px]">
         <svg
           className="mr-10"
           width="96"
@@ -18,7 +31,7 @@ const Header = () => {
           />
         </svg>
 
-        <Search />
+        <Search searchQuery={searchQuery} onSearchChange={handleSearchChange} />
 
         <svg
           className="ml-10"

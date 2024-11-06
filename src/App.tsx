@@ -4,18 +4,29 @@ import "./App.css";
 import Header from "./components/header";
 import HomePage from "./pages/HomePage";
 import { fetchCharacterList } from "./services/charactersApi";
+import { Character } from "./types/types";
 
-interface Character {
-  _id: string;
-  name: string;
-  films: string[];
-  imageUrl: string;
+interface AppProps {
+  characterData: Character[];
 }
 
-function App() {
+const App: React.FC<AppProps> = ({ characterData }) => {
   const [characterList, setCharacterList] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const handleSearch = (query: string) => {
+    console.log("aaa characterList", characterList);
+    setSearchQuery(query);
+  };
+
+  // Filter characters based on search query
+  const filteredCharacters = characterList
+    ? characterList.filter((character) =>
+        character.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
 
   useEffect(() => {
     const getCharacterList = async () => {
@@ -34,24 +45,30 @@ function App() {
     getCharacterList();
   }, []);
 
-  useEffect(() => {
-    console.log("aaa", characterList);
-  });
-
   return (
     <Router>
       <>
-        <Header />
+        <Header onSearch={handleSearch} />
         <div className="flex justify-center w-full">
-          <div className="flex flex-row bg-[#F1F2F3] p-20 w-[1200px]">
+          <div className="flex flex-row bg-[#F1F2F3] w-[1200px]">
             <Routes>
               <Route
                 path="/"
-                element={<HomePage characterData={characterList} />}
+                element={
+                  <HomePage
+                    characterData={characterList}
+                    filteredCharacters={filteredCharacters}
+                  />
+                }
               />
               <Route
                 path="/character"
-                element={<HomePage characterData={characterList} />}
+                element={
+                  <HomePage
+                    characterData={characterList}
+                    filteredCharacters={filteredCharacters}
+                  />
+                }
               />
             </Routes>
           </div>
@@ -59,6 +76,6 @@ function App() {
       </>
     </Router>
   );
-}
+};
 
 export default App;
