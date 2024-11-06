@@ -4,7 +4,6 @@ import FeaturedCharacters from "../components/featured-characters";
 import Footer from "../components/footer";
 import { Character } from "../types/types";
 import { format } from "date-fns";
-import { format as formatWithSuffix } from "date-fns-tz";
 
 interface CharacterDetailsProps {
   characterList: Character[];
