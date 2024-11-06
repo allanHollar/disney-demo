@@ -17,7 +17,6 @@ const App: React.FC<AppProps> = ({ characterData }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleSearch = (query: string) => {
-    console.log("aaa characterList", characterList);
     setSearchQuery(query);
   };
 
@@ -56,6 +55,7 @@ const App: React.FC<AppProps> = ({ characterData }) => {
                 path="/"
                 element={
                   <HomePage
+                    searchQuery={searchQuery}
                     characterData={characterList}
                     filteredCharacters={filteredCharacters}
                   />
@@ -65,6 +65,7 @@ const App: React.FC<AppProps> = ({ characterData }) => {
                 path="/character"
                 element={
                   <HomePage
+                    searchQuery={searchQuery}
                     characterData={characterList}
                     filteredCharacters={filteredCharacters}
                   />
