@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import CharacterCard from "../components/character-card";
 import FeaturedCharacters from "../components/featured-characters";
 import { Character } from "../types/types";
+import Footer from "../components/footer";
 
 interface HomePageProps {
   characterData: Character[];
@@ -27,6 +28,7 @@ const HomePage: React.FC<HomePageProps> = ({
         ))}
       </div>
       <FeaturedCharacters characterData={characterData} />
+      <Footer />
     </div>
   );
 };
