@@ -50,6 +50,8 @@ const App: React.FC<AppProps> = ({ characterData }) => {
         <Header onSearch={handleSearch} />
         <div className="flex justify-center w-full">
           <div className="flex flex-row bg-[#F1F2F3] w-[1200px]">
+            {isLoading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
             <Routes>
               <Route
                 path="/"

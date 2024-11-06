@@ -25,9 +25,10 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ characterData }) => {
         </h2>
         <h3 className="mb-4 font-bold text-[15px] leading-4">Featured Films</h3>
         <ul className="mb-4">
-          {characterData.films.map((film, index) => (
+          {characterData.films.slice(0, 4).map((film, index) => (
             <li className="font-normal text-xs leading-4" key={index}>
               {film}
+              {index === 3 && characterData.films.length > 4 ? "..." : ""}
             </li>
           ))}
         </ul>
