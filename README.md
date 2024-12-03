@@ -1,4 +1,4 @@
-# Barti - Character Coding Challenge
+# Disney Demo
 
 ### Technologies Used
 - NodeJS v18.20.4
